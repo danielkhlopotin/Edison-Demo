@@ -10,16 +10,28 @@ const CardHolder: React.FC = () => {
   const observer = useRef<IntersectionObserver | null>(null);
 
   const fetchUsers = async (count: number) => {
-    const response = await fetch(`https://randomuser.me/api/?results=${count}`);
-    const data: ApiResponse = await response.json();
-    return data.results;
+    try {
+      const response = await fetch(
+        `https://randomuser.me/api/?results=${count}`
+      );
+      const data: ApiResponse = await response.json();
+      return data.results;
+    } catch (error) {
+      console.error("Error retrieving user:", error);
+      return [];
+    }
   };
 
   const loadMoreCards = async () => {
     setLoading(true);
-    const newUsers = await fetchUsers(5);
-    setCards((prevCards) => [...prevCards, ...newUsers]);
-    setLoading(false);
+    try {
+      const newUsers = await fetchUsers(5);
+      setCards((prevCards) => [...prevCards, ...newUsers]);
+    } catch (error) {
+      console.error("Error retrieving user:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const lastCardRef = useCallback(
