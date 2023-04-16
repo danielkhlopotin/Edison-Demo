@@ -23,3 +23,8 @@ Then, in the project directory, you can run:
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+### Time spent
+
+Below you can see a breakdown of the time it took me to complete this:
+![Time Spent](public/time_spent.JPG)
